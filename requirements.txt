@@ -10,7 +10,7 @@ nltk==3.5
 numpy==1.19.5
 pandas==1.2.1
 Pillow==8.1.0
-praw==7.1.0
+praw
 prawcore==1.5.0
 pyparsing==2.4.7
 python-dateutil==2.8.1

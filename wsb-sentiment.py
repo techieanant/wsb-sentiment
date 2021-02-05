@@ -29,8 +29,10 @@ reddit = praw.Reddit(
 
 '''############################################################################'''
 # set the program parameters
-subs = ['wallstreetbets', 'stocks', 'investing', 'stockmarket', 'algotrading', 'robinhood']     # sub-reddit to search
+subs = ['wallstreetbets', 'stocks', 'investing', 'stockmarket', 'algotrading', 'robinhood'] 
+#subs = ['stockmarket']    # sub-reddit to search
 post_flairs = {'Daily Discussion', 'Weekend Discussion', 'Discussion', 'YOLO', 'News', 'Meme', 'DD', 'Gain', 'Loss', 'Stocks', 'Futures', 'Fundamentals', 'Technicals', 'Trades', 'Advice'}    # posts flairs to search || None flair is automatically considered
+#post_flairs = {'Discussion', 'YOLO'}    # posts flairs to search || None flair is automatically considered
 goodAuth = {'AutoModerator'}   # authors whom comments are allowed more than once
 uniqueCmt = True                # allow one comment per author per symbol
 ignoreAuthP = {'example'}       # authors to ignore for posts 
@@ -40,7 +42,7 @@ ups = 12       # define # of upvotes, post is considered if upvotes exceed this 
 limit = 10      # define the limit, comments 'replace more' limit
 upvotes = 2     # define # of upvotes, comment is considered if upvotes exceed this #
 picks = 10     # define # of picks here, prints as "Top ## picks are:"
-picks_ayz = 5   # define # of picks for sentiment analysis
+picks_ayz = 3   # define # of picks for sentiment analysis
 '''############################################################################'''
 
 posts, count, c_analyzed, tickers, titles, a_comments = 0, 0, 0, {}, [], {}
@@ -99,11 +101,11 @@ top_picks = list(symbols.keys())[0:picks]
 time = (time.time() - start_time)
 
 # print top picks
-print("It took {t:.2f} seconds to analyze {c} comments in {p} posts in {s} subreddits.\n".format(t=time, c=c_analyzed, p=posts, s=len(subs)))
-print("Posts analyzed saved in titles")
+#print("It took {t:.2f} seconds to analyze {c} comments in {p} posts in {s} subreddits.\n".format(t=time, c=c_analyzed, p=posts, s=len(subs)))
+#print("Posts analyzed saved in titles")
 #for i in titles: print(i)  # prints the title of the posts analyzed
 
-print(f"\n{picks} most mentioned picks: ")
+print(f"\n@wsbmod {picks} most mentioned stocks: ")
 times = []
 top = []
 for i in top_picks:
@@ -140,7 +142,7 @@ for symbol in picks_sentiment:
         scores[symbol][key]  = "{pol:.3f}".format(pol=scores[symbol][key])
  
 # printing sentiment analysis 
-print(f"\nSentiment analysis of top {picks_ayz} picks:")
+print(f"\n@wsbmod Sentiment analysis of top {picks_ayz} picks:")
 df = pd.DataFrame(scores)
 df.index = ['Bearish', 'Neutral', 'Bullish', 'Total/Compound']
 df = df.T
